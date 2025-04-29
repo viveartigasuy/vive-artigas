@@ -188,7 +188,46 @@
                             <p>Email: contacto@viveartigas.com</p>
                             <p>Teléfono: 098-123-456</p>
                             <div className="flex space-x-4 mt-2">
-                                <a href="https://facebook.com" target="_blank" className="hover:text-[var(--secondary)] transition-colors"><i className="fab fa-facebook-f"></Pan className="text-3xl font-bold mb-6 text-[var(--primary)]">Encuentra Tu Hogar en Uruguay</h1>
+                                <a href="https://facebook.com" target="_blank" className="hover:text-[var(--secondary)] transition-colors"><i className="fab fa-facebook-f"></i></a>
+                                <a href="https://twitter.com" target="_blank" className="hover:text-[var(--secondary)] transition-colors"><i className="fab fa-twitter"></i></a>
+                                <a href="https://instagram.com" target="_blank" className="hover:text-[var(--secondary)] transition-colors"><i className="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            );
+        }
+
+        function HomePage() {
+            const [searchTerm, setSearchTerm] = React.useState('');
+            const [showFilters, setShowFilters] = React.useState(false);
+            const [filterType, setFilterType] = React.useState('');
+            const [filterMinPrice, setFilterMinPrice] = React.useState('');
+            const [filterMaxPrice, setFilterMaxPrice] = React.useState('');
+            const [filterPointOfInterest, setFilterPointOfInterest] = React.useState('');
+            const [filterCity, setFilterCity] = React.useState('');
+            const [currentSlide, setCurrentSlide] = React.useState(0);
+
+            const filteredProperties = propertiesData.filter(prop => {
+                const matchesSearch = prop.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    prop.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    prop.type.toLowerCase().includes(searchTerm.toLowerCase());
+                const matchesType = filterType ? prop.type === filterType : true;
+                const matchesMinPrice = filterMinPrice ? prop.price >= parseInt(filterMinPrice) : true;
+                const matchesMaxPrice = filterMaxPrice ? prop.price <= parseInt(filterMaxPrice) : true;
+                const matchesPoi = filterPointOfInterest ? prop.pointsOfInterest.includes(filterPointOfInterest) : true;
+                const matchesCity = filterCity ? prop.city === filterCity : true;
+                return matchesSearch && matchesType && matchesMinPrice && matchesMaxPrice && matchesPoi && matchesCity;
+            });
+
+            const aiRecommendation = filteredProperties.find(p => p.isFeatured) || filteredProperties[0];
+            const featuredImages = filteredProperties.filter(p => p.isFeatured).map(p => p.images[0]);
+
+            return (
+                <div>
+                    <section className="hero-section text-white py-20 text-center">
+                        <div className="container mx-auto">
+                            <h1 className="text-3xl font-bold mb-6 text-[var(--primary)]">Encuentra Tu Hogar en Uruguay</h1>
                             <p className="text-xl mb-6">Propiedades únicas en Artigas y todo el país.</p>
                             <Link to="/register" className="cta-button inline-block btn-secondary font-semibold">Regístrate Ahora</Link>
                         </div>
@@ -322,6 +361,7 @@
                     <div className="chat-bubble" onClick={() => alert('¡Contacta con nuestro soporte en vivo!')}>
                         <i className="fas fa-comment-alt mr-2"></i> Soporte
                     </div>
+                    <Footer />
                 </div>
             );
         }
@@ -375,6 +415,7 @@
                             ¿No tienes cuenta? <Link to="/register" className="text-[var(--accent)] hover:underline">Regístrate</Link>
                         </p>
                     </div>
+                    <Footer />
                 </div>
             );
         }
@@ -487,6 +528,7 @@
                             <button type="submit" className="w-full btn-primary">Crear Perfil</button>
                         </form>
                     </div>
+                    <Footer />
                 </div>
             );
         }
@@ -602,6 +644,7 @@
                             </div>
                         </>
                     )}
+                    <Footer />
                 </div>
             );
         }
@@ -676,6 +719,7 @@
                             </div>
                         ))}
                     </div>
+                    <Footer />
                 </div>
             );
         }
@@ -705,6 +749,7 @@
                         </div>
                     )}
                     <Link to="/" className="inline-block btn-primary">Volver</Link>
+                    <Footer />
                 </div>
             );
         }
@@ -899,6 +944,7 @@
                         </div>
                         <button type="submit" className="w-full btn-primary">Publicar Propiedad</button>
                     </form>
+                    <Footer />
                 </div>
             );
         }
@@ -927,6 +973,7 @@
                             </div>
                         ))}
                     </div>
+                    <Footer />
                 </div>
             );
         }
@@ -1039,6 +1086,7 @@
                         </div>
                         <button type="submit" className="w-full btn-primary">Crear Perfil</button>
                     </form>
+                    <Footer />
                 </div>
             );
         }
@@ -1083,6 +1131,7 @@
                         ))}
                     </div>
                     <Link to="/agencies" className="inline-block btn-primary mt-6">Volver</Link>
+                    <Footer />
                 </div>
             );
         }
@@ -1191,6 +1240,7 @@
                             </div>
                         ))}
                     </div>
+                    <Footer />
                 </div>
             );
         }
@@ -1225,6 +1275,7 @@
                             </div>
                         ))}
                     </div>
+                    <Footer />
                 </div>
             );
         }
@@ -1260,60 +1311,4 @@
                             <h2 className="text-2xl font-semibold mb-4 text-[var(--primary)]">Premium</h2>
                             <p className="text-3xl font-bold text-[var(--primary)] mb-4">$50/mes</p>
                             <ul className="text-gray-600 mb-6">
-                                <li>Propiedades ilimitadas</li>
-                                <li>Análisis de mercado</li>
-                                <li>Soporte 24/7</li>
-                                <li>Anuncios patrocinados</li>
-                            </ul>
-                            <Link to="/register" className="inline-block btn-primary">Seleccionar</Link>
-                        </div>
-                    </div>
-                </div>
-            );
-        }
-
-        function AdvertisePage() {
-            return (
-                <div className="container mx-auto p-6">
-                    <h1 className="text-3xl font-bold text-center mb-6 text-[var(--primary)]">Publicidad</h1>
-                    <p className="text-center text-gray-600 mb-6">Promociona tu negocio en Vive Artigas.</p>
-                    <div className="bg-white p-8 rounded-lg shadow-xl max-w-2xl mx-auto">
-                        <h2 className="text-2xl font-semibold mb-4 text-[var(--primary)]">Contáctanos</h2>
-                        <form className="space-y-4">
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 required">Nombre:</label>
-                                <input
-                                    type="text"
-                                    className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
-                                    required
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 required">Email:</label>
-                                <input
-                                    type="email"
-                                    className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
-                                    required
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700">Mensaje:</label>
-                                <textarea
-                                    className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
-                                    rows="4"
-                                ></textarea>
-                            </div>
-                            <button type="submit" className="w-full btn-primary">Enviar</button>
-                        </form>
-                    </div>
-                </div>
-            );
-        }
-
-        function App() {
-            return (
-                <BrowserRouter>
-                    <Header />
-                    <Switch>
-                        <Route exact path="/" component={HomePage} />
-                        <Route path="/login" component={Login
+                                <li>Propiedades ilimitadas</li
