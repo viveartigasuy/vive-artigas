@@ -10,9 +10,9 @@
     <script src="https://cdn.tailwindcss.com/3.4.1"></script>
     <style>
         :root {
-            --primary: #1E3A8A; /* Deep Blue */
-            --secondary: #FBBF24; /* Vibrant Yellow */
-            --accent: #10B981; /* Emerald Green */
+            --primary: #1E3A8A;
+            --secondary: #FBBF24;
+            --accent: #10B981;
         }
         .property-card, .agency-card, .neighborhood-card {
             transition: transform 0.3s, box-shadow 0.3s;
@@ -95,7 +95,6 @@
     <script type="text/babel">
         const { BrowserRouter, Route, Switch, Link, useParams, useHistory } = ReactRouterDOM;
 
-        // Data
         let propertiesData = [
             { id: 1, type: "Casa", title: "Casa Céntrica en Artigas", description: "Casa de 3 dormitorios cerca de Plaza Artigas.", price: 25000, location: "Centro, Artigas", bedrooms: 3, bathrooms: 2, area: 120, yearBuilt: 2010, amenities: ["jardín", "garaje"], images: ["https://via.placeholder.com/600x400?text=Casa+Artigas+1"], pointsOfInterest: ["Plaza Artigas", "Escuela"], agencyId: 1, userId: null, isFeatured: true, city: "Artigas" },
             { id: 2, type: "Apartamento", title: "Apartamento Moderno", description: "Apartamento nuevo en Barrio Norte.", price: 18000, location: "Norte, Artigas", bedrooms: 2, bathrooms: 1, area: 80, yearBuilt: 2020, amenities: ["balcón"], images: ["https://via.placeholder.com/600x400?text=Apartamento+1"], pointsOfInterest: ["Supermercado"], agencyId: null, userId: null, isFeatured: false, city: "Artigas" }
@@ -117,12 +116,10 @@
             { id: 1, email: "admin@viveartigas.com", password: "admin123", role: "admin", name: "Admin", profilePic: "https://via.placeholder.com/100?text=Admin", bio: "Administrador de Vive Artigas", city: "Artigas", createdAt: new Date().toISOString() }
         ];
 
-        // Helper to save users to localStorage
         const saveUsers = (users) => {
             localStorage.setItem('users', JSON.stringify(users));
         };
 
-        // Header Component
         function Header() {
             const [user, setUser] = React.useState(JSON.parse(localStorage.getItem('currentUser')));
             const history = useHistory();
@@ -161,7 +158,6 @@
             );
         }
 
-        // Footer Component
         function Footer() {
             return (
                 <footer className="bg-gray-900 text-white p-6">
@@ -192,62 +188,7 @@
                             <p>Email: contacto@viveartigas.com</p>
                             <p>Teléfono: 098-123-456</p>
                             <div className="flex space-x-4 mt-2">
-                                <a href="https://facebook.com" target="_blank" className="hover:text-[var(--secondary)] transition-colors"><i className="fab fa-facebook-f"></i></a>
-                                <a href="https://twitter.com" target="_blank" className="hover:text-[var(--secondary)] transition-colors"><i className="fab fa-twitter"></i></a>
-                                <a href="https://instagram.com" target="_blank" className="hover:text-[var(--secondary)] transition-colors"><i className="fab fa-instagram"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <p className="text-center mt-6">© 2025 Vive Artigas - Uruguay.</p>
-                </footer>
-            );
-        }
-
-        // HomePage Component
-        function HomePage() {
-            const [searchTerm, setSearchTerm] = React.useState('');
-            const [filterType, setFilterType] = React.useState('');
-            const [filterMinPrice, setFilterMinPrice] = React.useState('');
-            const [filterMaxPrice, setFilterMaxPrice] = React.useState('');
-            const [filterPointOfInterest, setFilterPointOfInterest] = React.useState('');
-            const [filterCity, setFilterCity] = React.useState('');
-            const [showFilters, setShowFilters] = React.useState(false);
-            const [currentSlide, setCurrentSlide] = React.useState(0);
-
-            const featuredImages = [
-                "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
-                "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
-                "https://images.unsplash.com/photo-1600566753376-77c1a7a26e57?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80"
-            ];
-
-            React.useEffect(() => {
-                const interval = setInterval(() => {
-                    setCurrentSlide((prev) => (prev + 1) % featuredImages.length);
-                }, 5000);
-                return () => clearInterval(interval);
-            }, []);
-
-            const filteredProperties = propertiesData.filter(prop => {
-                return (
-                    (prop.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                     prop.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                     prop.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                     prop.type.toLowerCase().includes(searchTerm.toLowerCase())) &&
-                    (!filterType || prop.type === filterType) &&
-                    (!filterMinPrice || prop.price >= parseFloat(filterMinPrice)) &&
-                    (!filterMaxPrice || prop.price <= parseFloat(filterMaxPrice)) &&
-                    (!filterPointOfInterest || prop.pointsOfInterest.includes(filterPointOfInterest)) &&
-                    (!filterCity || prop.city === filterCity)
-                );
-            });
-
-            const aiRecommendation = filteredProperties.length > 0 ? filteredProperties[0] : null;
-
-            return (
-                <div>
-                    <section className="hero-section text-white py-24 text-center">
-                        <div className="container mx-auto">
-                            <h1 className="text-5xl font-bold mb-4">Encuentra Tu Hogar en Uruguay</h1>
+                                <a href="https://facebook.com" target="_blank" className="hover:text-[var(--secondary)] transition-colors"><i className="fab fa-facebook-f"></Pan className="text-3xl font-bold mb-6 text-[var(--primary)]">Encuentra Tu Hogar en Uruguay</h1>
                             <p className="text-xl mb-6">Propiedades únicas en Artigas y todo el país.</p>
                             <Link to="/register" className="cta-button inline-block btn-secondary font-semibold">Regístrate Ahora</Link>
                         </div>
@@ -385,7 +326,6 @@
             );
         }
 
-        // LoginPage Component
         function LoginPage() {
             const [email, setEmail] = React.useState('');
             const [password, setPassword] = React.useState('');
@@ -439,7 +379,6 @@
             );
         }
 
-        // RegisterPage Component
         function RegisterPage() {
             const [formData, setFormData] = React.useState({
                 email: '', password: '', name: '', role: 'client', profilePic: '', bio: '', city: 'Artigas'
@@ -490,537 +429,10 @@
                                     type="password"
                                     value={formData.password}
                                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                                    className="mt-1 w-full p-2 border border-gray-300 rounded Elian
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 required">Nombre:</label>
-                                    <input
-                                        type="text"
-                                        value={formData.name}
-                                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                        className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
-                                    />
-                                    {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700">Rol:</label>
-                                    <select
-                                        value={formData.role}
-                                        onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                                        className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
-                                    >
-                                        <option value="client">Cliente</option>
-                                        <option value="agency">Inmobiliaria</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700">Foto de Perfil (URL):</label>
-                                    <input
-                                        type="url"
-                                        value={formData.profilePic}
-                                        onChange={(e) => setFormData({ ...formData, profilePic: e.target.value })}
-                                        className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700">Biografía:</label>
-                                    <textarea
-                                        value={formData.bio}
-                                        onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
-                                        className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
-                                        rows="4"
-                                    ></textarea>
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700">Ciudad:</label>
-                                    <select
-                                        value={formData.city}
-                                        onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                                        className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
-                                    >
-                                        <option value="Artigas">Artigas</option>
-                                        <option value="Montevideo">Montevideo</option>
-                                        <option value="Salto">Salto</option>
-                                    </select>
-                                </div>
-                                <button type="submit" className="w-full btn-primary">Crear Perfil</button>
-                            </form>
-                        </div>
-                    </div>
-                );
-            }
-
-            // ProfilePage Component
-            function ProfilePage() {
-                const [user, setUser] = React.useState(JSON.parse(localStorage.getItem('currentUser')));
-                const [formData, setFormData] = React.useState(user || {});
-                const [errors, setErrors] = React.useState({});
-                const history = useHistory();
-
-                if (!user) {
-                    history.push('/login');
-                    return null;
-                }
-
-                const handleUpdate = (e) => {
-                    e.preventDefault();
-                    const newErrors = {};
-                    if (!formData.email) newErrors.email = 'El email es obligatorio.';
-                    if (!formData.name) newErrors.name = 'El nombre es obligatorio.';
-                    setErrors(newErrors);
-                    if (Object.keys(newErrors).length > 0) return;
-
-                    const updatedUsers = usersData.map(u => u.id === user.id ? { ...formData, id: user.id, role: user.role, createdAt: user.createdAt } : u);
-                    saveUsers(updatedUsers);
-                    localStorage.setItem('currentUser', JSON.stringify(formData));
-                    setUser(formData);
-                    alert('Perfil actualizado.');
-                };
-
-                const userProperties = user.role === 'client' ? propertiesData.filter(p => p.userId === user.id) : propertiesData.filter(p => p.agencyId === user.id);
-
-                return (
-                    <div className="container mx-auto p-6">
-                        <h1 className="text-3xl font-bold mb-6 text-center text-[var(--primary)]">Mi Perfil</h1>
-                        <div className="profile-card max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-xl mb-8">
-                            <img src={formData.profilePic} alt={formData.name} className="w-32 h-32 rounded-full mx-auto mb-4 object-cover" />
-                            <form onSubmit={handleUpdate} className="space-y-4">
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 required">Email:</label>
-                                    <input
-                                        type="email"
-                                        value={formData.email}
-                                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                        className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
-                                    />
-                                    {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 required">Nombre:</label>
-                                    <input
-                                        type="text"
-                                        value={formData.name}
-                                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                        className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
-                                    />
-                                    {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700">Foto de Perfil (URL):</label>
-                                    <input
-                                        type="url"
-                                        value={formData.profilePic}
-                                        onChange={(e) => setFormData({ ...formData, profilePic: e.target.value })}
-                                        className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700">Biografía:</label>
-                                    <textarea
-                                        value={formData.bio}
-                                        onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
-                                        className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
-                                        rows="4"
-                                    ></textarea>
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700">Ciudad:</label>
-                                    <select
-                                        value={formData.city}
-                                        onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                                        className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
-                                    >
-                                        <option value="Artigas">Artigas</option>
-                                        <option value="Montevideo">Montevideo</option>
-                                        <option value="Salto">Salto</option>
-                                    </select>
-                                </div>
-                                <button type="submit" className="w-full btn-primary">Actualizar Perfil</button>
-                            </form>
-                        </div>
-
-                        {user.role !== 'admin' && (
-                            <>
-                                <h2 className="text-2xl font-semibold mb-4 text-[var(--primary)]">Mis Propiedades</h2>
-                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                                    {userProperties.map(prop => (
-                                        <div key={prop.id} className="property-card bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
-                                            <img src={prop.images[0]} alt={prop.title} className="w-full h-48 object-cover" />
-                                            <div className="p-4 flex-grow flex flex-col justify-between">
-                                                <div>
-                                                    <span className="inline-block bg-[var(--accent)] text-white text-xs px-2 rounded-full mb-1">{prop.type}</span>
-                                                    <h3 className="text-xl font-semibold mb-1">{prop.title}</h3>
-                                                    <p className="text-gray-600 text-sm mb-2">{prop.location}</p>
-                                                </div>
-                                                <div>
-                                                    <p className="text-2xl font-bold text-[var(--primary)] mb-3">UYU {prop.price}/mes</p>
-                                                    <Link to={`/property/${prop.id}`} className="block text-center btn-primary">Ver Detalles</Link>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </>
-                        )}
-                    </div>
-                );
-            }
-
-            // AdminPage Component
-            function AdminPage() {
-                const [user] = React.useState(JSON.parse(localStorage.getItem('currentUser')));
-                const [users, setUsers] = React.useState(usersData);
-                const history = useHistory();
-
-                if (!user || user.role !== 'admin') {
-                    history.push('/login');
-                    return null;
-                }
-
-                const handleDeleteUser = (userId) => {
-                    const updatedUsers = users.filter(u => u.id !== userId);
-                    setUsers(updatedUsers);
-                    saveUsers(updatedUsers);
-                    alert('Usuario eliminado.');
-                };
-
-                const handleToggleFeatured = (propId) => {
-                    propertiesData.forEach(prop => {
-                        if (prop.id === propId) {
-                            prop.isFeatured = !prop.isFeatured;
-                        }
-                    });
-                    alert('Estado de propiedad actualizado.');
-                };
-
-                return (
-                    <div className="container mx-auto p-6">
-                        <h1 className="text-3xl font-bold mb-6 text-center text-[var(--primary)]">Panel de Administración</h1>
-                        <h2 className="text-2xl font-semibold mb-4 text-[var(--primary)]">Gestionar Usuarios</h2>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                            {users.filter(u => u.role !== 'admin').map(u => (
-                                <div key={u.id} className="bg-white p-4 rounded-lg shadow-md">
-                                    <h3 className="text-xl font-semibold">{u.name}</h3>
-                                    <p className="text-gray-600">Email: {u.email}</p>
-                                    <p className="text-gray-600">Rol: {u.role}</p>
-                                    <p className="text-gray-600">Ciudad: {u.city}</p>
-                                    <button
-                                        onClick={() => handleDeleteUser(u.id)}
-                                        className="mt-2 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-                                    >
-                                        Eliminar
-                                    </button>
-                                </div>
-                            ))}
-                        </div>
-                        <h2 className="text-2xl font-semibold mb-4 text-[var(--primary)]">Gestionar Propiedades</h2>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {propertiesData.map(prop => (
-                                <div key={prop.id} className="property-card bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
-                                    <img src={prop.images[0]} alt={prop.title} className="w-full h-48 object-cover" />
-                                    <div className="p-4 flex-grow flex flex-col justify-between">
-                                        <div>
-                                            <span className="inline-block bg-[var(--accent)] text-white text-xs px-2 rounded-full mb-1">{prop.type}</span>
-                                            <h3 className="text-xl font-semibold mb-1">{prop.title}</h3>
-                                            <p className="text-gray-600 text-sm mb-2">{prop.location}</p>
-                                        </div>
-                                        <div>
-                                            <p className="text-2xl font-bold text-[var(--primary)] mb-3">UYU {prop.price}/mes</p>
-                                            <button
-                                                onClick={() => handleToggleFeatured(prop.id)}
-                                                className={`block text-center px-4 py-2 rounded ${prop.isFeatured ? 'bg-[var(--secondary)] text-black' : 'bg-gray-500 text-white'} hover:bg-opacity-80`}
-                                            >
-                                                {prop.isFeatured ? 'Quitar Destacado' : 'Marcar Destacado'}
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                );
-            }
-
-            // PropertyPage Component
-            function PropertyPage() {
-                const { id } = useParams();
-                const property = propertiesData.find(p => p.id === parseInt(id));
-                if (!property) return <div className="container mx-auto p-6">Propiedad no encontrada</div>;
-                const agency = agenciesData.find(a => a.id === property.agencyId);
-                return (
-                    <div className="container mx-auto p-6">
-                        <h1 className="text-3xl font-bold mb-6 text-[var(--primary)]">{property.title}</h1>
-                        <img src={property.images[0]} alt={property.title} className="w-full h-96 object-cover rounded-lg mb-4" />
-                        <p className="text-gray-700 mb-4">{property.description}</p>
-                        <p className="text-2xl font-bold text-[var(--primary)] mb-4">UYU {property.price}/mes</p>
-                        <p className="text-gray-600 mb-2"><strong>Ubicación:</strong> {property.location}</p>
-                        <p className="text-gray-600 mb-2"><strong>Dormitorios:</strong> {property.bedrooms}</p>
-                        <p className="text-gray-600 mb-2"><strong>Baños:</strong> {property.bathrooms}</p>
-                        <p className="text-gray-600 mb-2"><strong>Área:</strong> {property.area} m²</p>
-                        <p className="text-gray-600 mb-4"><strong>Puntos de Interés:</strong> {property.pointsOfInterest.join(', ')}</p>
-                        {agency && (
-                            <div className="bg-white p-4 rounded-lg shadow-md mb-4">
-                                <h3 className="text-xl font-semibold mb-2">Publicado por: {agency.name}</h3>
-                                <img src={agency.logo} alt={agency.name} className="w-24 h-24 object-contain mb-2" />
-                                <p className="text-gray-600">{agency.description}</p>
-                                <p className="text-[var(--accent)]">Contacto: {agency.contact}</p>
-                            </div>
-                        )}
-                        <Link to="/" className="inline-block btn-primary">Volver</Link>
-                    </div>
-                );
-            }
-
-            // ListPropertyPage Component
-            function ListPropertyPage() {
-                const [user] = React.useState(JSON.parse(localStorage.getItem('currentUser')));
-                const [formData, setFormData] = React.useState({
-                    type: '', title: '', description: '', price: '', location: '', bedrooms: '', bathrooms: '', area: '', amenities: [], images: [''], pointsOfInterest: [], city: 'Artigas'
-                });
-                const [errors, setErrors] = React.useState({});
-                const history = useHistory();
-
-                if (!user) {
-                    history.push('/login');
-                    return null;
-                }
-
-                const handleSubmit = (e) => {
-                    e.preventDefault();
-                    const newErrors = {};
-                    if (!formData.type) newErrors.type = 'El tipo es obligatorio.';
-                    if (!formData.title) newErrors.title = 'El título es obligatorio.';
-                    if (!formData.price) newErrors.price = 'El precio es obligatorio.';
-                    if (!formData.location) newErrors.location = 'La ubicación es obligatoria.';
-                    setErrors(newErrors);
-                    if (Object.keys(newErrors).length > 0) return;
-
-                    propertiesData.push({
-                        id: Date.now(),
-                        ...formData,
-                        agencyId: user.role === 'agency' ? user.id : null,
-                        userId: user.role === 'client' ? user.id : null,
-                        isFeatured: false
-                    });
-                    alert('Propiedad publicada (simulada).');
-                    history.push('/profile');
-                };
-
-                const handleAmenityChange = (amenity) => {
-                    setFormData({
-                        ...formData,
-                        amenities: formData.amenities.includes(amenity)
-                            ? formData.amenities.filter(a => a !== amenity)
-                            : [...formData.amenities, amenity]
-                    });
-                };
-
-                const handlePoiChange = (poi) => {
-                    setFormData({
-                        ...formData,
-                        pointsOfInterest: formData.pointsOfInterest.includes(poi)
-                            ? formData.pointsOfInterest.filter(p => p !== poi)
-                            : [...formData.pointsOfInterest, poi]
-                    });
-                };
-
-                return (
-                    <div className="container mx-auto p-6">
-                        <h1 className="text-3xl font-bold mb-6 text-[var(--primary)]">Publicar Propiedad</h1>
-                        <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-xl space-y-4">
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 required">Tipo:</label>
-                                <select
-                                    value={formData.type}
-                                    onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-                                    className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
-                                >
-                                    <option value="">Selecciona</option>
-                                    <option value="Casa">Casa</option>
-                                    <option value="Apartamento">Apartamento</option>
-                                </select>
-                                {errors.type && <p className="text-red-500 text-sm mt-1">{errors.type}</p>}
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 required">Título:</label>
-                                <input
-                                    type="text"
-                                    value={formData.title}
-                                    onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                                     className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
                                 />
-                                {errors.title && <p className="text-red-500 text-sm mt-1">{errors.title}</p>}
+                                {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
                             </div>
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700">Descripción:</label>
-                                <textarea
-                                    value={formData.description}
-                                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                                    className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
-                                    rows="4"
-                                ></textarea>
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 required">Precio (UYU):</label>
-                                <input
-                                    type="number"
-                                    value={formData.price}
-                                    onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-                                    className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
-                                />
-                                {errors.price && <p className="text-red-500 text-sm mt-1">{errors.price}</p>}
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 required">Ubicación:</label>
-                                <input
-                                    type="text"
-                                    value={formData.location}
-                                    onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                                    className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
-                                />
-                                {errors.location && <p className="text-red-500 text-sm mt-1">{errors.location}</p>}
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700">Dormitorios:</label>
-                                <input
-                                    type="number"
-                                    value={formData.bedrooms}
-                                    onChange={(e) => setFormData({ ...formData, bedrooms: e.target.value })}
-                                    className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700">Baños:</label>
-                                <input
-                                    type="number"
-                                    value={formData.bathrooms}
-                                    onChange={(e) => setFormData({ ...formData, bathrooms: e.target.value })}
-                                    className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700">Área (m²):</label>
-                                <input
-                                    type="number"
-                                    value={formData.area}
-                                    onChange={(e) => setFormData({ ...formData, area: e.target.value })}
-                                    className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700">Ciudad:</label>
-                                <select
-                                    value={formData.city}
-                                    onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                                    className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
-                                >
-                                    <option value="Artigas">Artigas</option>
-                                    <option value="Montevideo">Montevideo</option>
-                                    <option value="Salto">Salto</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700">Comodidades:</label>
-                                <div className="flex flex-wrap gap-4">
-                                    {['jardín', 'garaje', 'balcón', 'piscina'].map(amenity => (
-                                        <label key={amenity} className="flex items-center">
-                                            <input
-                                                type="checkbox"
-                                                checked={formData.amenities.includes(amenity)}
-                                                onChange={() => handleAmenityChange(amenity)}
-                                                className="mr-2"
-                                            />
-                                            {amenity}
-                                        </label>
-                                    ))}
-                                </div>
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700">Puntos de Interés:</label>
-                                <div className="flex flex-wrap gap-4">
-                                    {['Plaza Artigas', 'Escuela', 'Supermercado'].map(poi => (
-                                        <label key={poi} className="flex items-center">
-                                            <input
-                                                type="checkbox"
-                                                checked={formData.pointsOfInterest.includes(poi)}
-                                                onChange={() => handlePoiChange(poi)}
-                                                className="mr-2"
-                                            />
-                                            {poi}
-                                        </label>
-                                    ))}
-                                </div>
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700">Imagen (URL):</label>
-                                <input
-                                    type="url"
-                                    value={formData.images[0]}
-                                    onChange={(e) => setFormData({ ...formData, images: [e.target.value] })}
-                                    className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
-                                />
-                            </div>
-                            <button type="submit" className="w-full btn-primary">Publicar Propiedad</button>
-                        </form>
-                    </div>
-                );
-            }
-
-            // AgenciesPage Component
-            function AgenciesPage() {
-                return (
-                    <div className="container mx-auto p-6">
-                        <h1 className="text-3xl font-bold text-center mb-6 text-[var(--primary)]">Inmobiliarias en Uruguay</h1>
-                        <p className="text-center text-gray-600 mb-6">Conecta con las mejores inmobiliarias.</p>
-                        <Link to="/create-agency" className="inline-block btn-primary mb-6">Crear Perfil Inmobiliaria</Link>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {agenciesData.map(agency => (
-                                <div key={agency.id} className="agency-card bg-white p-4 rounded-lg shadow-md">
-                                    <img src={agency.logo} alt={agency.name} className="w-24 h-24 object-contain mx-auto mb-4" />
-                                    <h3 className="text-xl font-semibold text-center mb-2">{agency.name}</h3>
-                                    <p className="text-gray-600 text-center mb-2">{agency.description}</p>
-                                    <p className="text-gray-600 text-center mb-2"><strong>Plan:</strong> {agency.plan}</p>
-                                    <p className="text-[var(--accent)] text-center mb-2"><strong>Contacto:</strong> {agency.contact}</p>
-                                    <a href={agency.website} target="_blank" className="text-[var(--accent)] text-center block mb-2 hover:underline">Visitar sitio web</a>
-                                    <div className="flex flex-wrap gap-2 justify-center">
-                                        {agency.images.map((img, idx) => (
-                                            <img key={idx} src={img} alt={`Office ${idx}`} className="w-20 h-20 object-cover rounded" />
-                                        ))}
-                                    </div>
-                                    <Link to={`/agency/${agency.id}`} className="block text-center btn-primary mt-4">Ver Perfil</Link>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                );
-            }
-
-            // CreateAgencyPage Component
-            function CreateAgencyPage() {
-                const [formData, setFormData] = React.useState({
-                    name: '', logo: '', description: '', images: [''], plan: 'Básico', contact: '', website: '', city: 'Artigas'
-                });
-                const [errors, setErrors] = React.useState({});
-                const history = useHistory();
-
-                const handleSubmit = (e) => {
-                    e.preventDefault();
-                    const newErrors = {};
-                    if (!formData.name) newErrors.name = 'El nombre es obligatorio.';
-                    if (!formData.description) newErrors.description = 'La descripción es obligatoria.';
-                    if (!formData.contact) newErrors.contact = 'El contacto es obligatorio.';
-                    setErrors(newErrors);
-                    if (Object.keys(newErrors).length > 0) return;
-
-                    agenciesData.push({ id: Date.now(), ...formData });
-                    alert('Perfil de inmobiliaria creado (simulado).');
-                    history.push('/agencies');
-                };
-
-                return (
-                    <div className="container mx-auto p-6">
-                        <h1 className="text-3xl font-bold mb-6 text-[var(--primary)]">Crear Perfil de Inmobiliaria</h1>
-                        <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-xl space-y-4">
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 required">Nombre:</label>
                                 <input
@@ -1032,63 +444,33 @@
                                 {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-gray-700">Logo (URL):</label>
-                                <input
-                                    type="url"
-                                    value={formData.logo}
-                                    onChange={(e) => setFormData({ ...formData, logo: e.target.value })}
-                                    className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 required">Descripción:</label>
-                                <textarea
-                                    value={formData.description}
-                                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                                    className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
-                                    rows="4"
-                                ></textarea>
-                                {errors.description && <p className="text-red-500 text-sm mt-1">{errors.description}</p>}
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700">Imágenes (URL):</label>
-                                <input
-                                    type="url"
-                                    value={formData.images[0]}
-                                    onChange={(e) => setFormData({ ...formData, images: [e.target.value] })}
-                                    className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700">Plan:</label>
+                                <label className="block text-sm font-medium text-gray-700">Rol:</label>
                                 <select
-                                    value={formData.plan}
-                                    onChange={(e) => setFormData({ ...formData, plan: e.target.value })}
+                                    value={formData.role}
+                                    onChange={(e) => setFormData({ ...formData, role: e.target.value })}
                                     className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
                                 >
-                                    <option value="Básico">Básico ($10/mes)</option>
-                                    <option value="Pro">Pro ($25/mes)</option>
-                                    <option value="Premium">Premium ($50/mes)</option>
+                                    <option value="client">Cliente</option>
+                                    <option value="agency">Inmobiliaria</option>
                                 </select>
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 required">Contacto:</label>
-                                <input
-                                    type="text"
-                                    value={formData.contact}
-                                    onChange={(e) => setFormData({ ...formData, contact: e.target.value })}
-                                    className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
-                                />
-                                {errors.contact && <p className="text-red-500 text-sm mt-1">{errors.contact}</p>}
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700">Sitio Web:</label>
+                                <label className="block text-sm font-medium text-gray-700">Foto de Perfil (URL):</label>
                                 <input
                                     type="url"
-                                    value={formData.website}
-                                    onChange={(e) => setFormData({ ...formData, website: e.target.value })}
+                                    value={formData.profilePic}
+                                    onChange={(e) => setFormData({ ...formData, profilePic: e.target.value })}
                                     className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
                                 />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700">Biografía:</label>
+                                <textarea
+                                    value={formData.bio}
+                                    onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
+                                    className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
+                                    rows="4"
+                                ></textarea>
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700">Ciudad:</label>
@@ -1105,178 +487,833 @@
                             <button type="submit" className="w-full btn-primary">Crear Perfil</button>
                         </form>
                     </div>
-                );
+                </div>
+            );
+        }
+
+        function ProfilePage() {
+            const [user, setUser] = React.useState(JSON.parse(localStorage.getItem('currentUser')));
+            const [formData, setFormData] = React.useState(user || {});
+            const [errors, setErrors] = React.useState({});
+            const history = useHistory();
+
+            if (!user) {
+                history.push('/login');
+                return null;
             }
 
-            // AgencyProfilePage Component
-            function AgencyProfilePage() {
-                const { id } = useParams();
-                const agency = agenciesData.find(a => a.id === parseInt(id));
-                if (!agency) return <div className="container mx-auto p-6">Inmobiliaria no encontrada</div>;
-                const agencyProperties = propertiesData.filter(p => p.agencyId === agency.id);
-                return (
-                    <div className="container mx-auto p-6">
-                        <h1 className="text-3xl font-bold mb-6 text-[var(--primary)]">{agency.name}</h1>
-                        <div className="bg-white p-6 rounded-lg shadow-md mb-6">
-                            <img src={agency.logo} alt={agency.name} className="w-32 h-32 object-contain mx-auto mb-4" />
-                            <p className="text-gray-700 mb-4">{agency.description}</p>
-                            <p className="text-gray-600 mb-2"><strong>Plan:</strong> {agency.plan}</p>
-                            <p className="text-[var(--accent)] mb-2"><strong>Contacto:</strong> {agency.contact}</p>
-                            {agency.website && <a href={agency.website} target="_blank" className="text-[var(--accent)] mb-2 block hover:underline">Visitar sitio web</a>}
-                            <div className="flex flex-wrap gap-2 justify-center">
-                                {agency.images.map((img, idx) => (
-                                    <img key={idx} src={img} alt={`Office ${idx}`} className="w-24 h-24 object-cover rounded" />
+            const handleUpdate = (e) => {
+                e.preventDefault();
+                const newErrors = {};
+                if (!formData.email) newErrors.email = 'El email es obligatorio.';
+                if (!formData.name) newErrors.name = 'El nombre es obligatorio.';
+                setErrors(newErrors);
+                if (Object.keys(newErrors).length > 0) return;
+
+                const updatedUsers = usersData.map(u => u.id === user.id ? { ...formData, id: user.id, role: user.role, createdAt: user.createdAt } : u);
+                saveUsers(updatedUsers);
+                localStorage.setItem('currentUser', JSON.stringify(formData));
+                setUser(formData);
+                alert('Perfil actualizado.');
+            };
+
+            const userProperties = user.role === 'client' ? propertiesData.filter(p => p.userId === user.id) : propertiesData.filter(p => p.agencyId === user.id);
+
+            return (
+                <div className="container mx-auto p-6">
+                    <h1 className="text-3xl font-bold mb-6 text-center text-[var(--primary)]">Mi Perfil</h1>
+                    <div className="profile-card max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-xl mb-8">
+                        <img src={formData.profilePic} alt={formData.name} className="w-32 h-32 rounded-full mx-auto mb-4 object-cover" />
+                        <form onSubmit={handleUpdate} className="space-y-4">
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 required">Email:</label>
+                                <input
+                                    type="email"
+                                    value={formData.email}
+                                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                    className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
+                                />
+                                {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 required">Nombre:</label>
+                                <input
+                                    type="text"
+                                    value={formData.name}
+                                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                    className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
+                                />
+                                {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700">Foto de Perfil (URL):</label>
+                                <input
+                                    type="url"
+                                    value={formData.profilePic}
+                                    onChange={(e) => setFormData({ ...formData, profilePic: e.target.value })}
+                                    className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700">Biografía:</label>
+                                <textarea
+                                    value={formData.bio}
+                                    onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
+                                    className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
+                                    rows="4"
+                                ></textarea>
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700">Ciudad:</label>
+                                <select
+                                    value={formData.city}
+                                    onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                                    className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
+                                >
+                                    <option value="Artigas">Artigas</option>
+                                    <option value="Montevideo">Montevideo</option>
+                                    <option value="Salto">Salto</option>
+                                </select>
+                            </div>
+                            <button type="submit" className="w-full btn-primary">Actualizar Perfil</button>
+                        </form>
+                    </div>
+
+                    {user.role !== 'admin' && (
+                        <>
+                            <h2 className="text-2xl font-semibold mb-4 text-[var(--primary)]">Mis Propiedades</h2>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                                {userProperties.map(prop => (
+                                    <div key={prop.id} className="property-card bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
+                                        <img src={prop.images[0]} alt={prop.title} className="w-full h-48 object-cover" />
+                                        <div className="p-4 flex-grow flex flex-col justify-between">
+                                            <div>
+                                                <span className="inline-block bg-[var(--accent)] text-white text-xs px-2 rounded-full mb-1">{prop.type}</span>
+                                                <h3 className="text-xl font-semibold mb-1">{prop.title}</h3>
+                                                <p className="text-gray-600 text-sm mb-2">{prop.location}</p>
+                                            </div>
+                                            <div>
+                                                <p className="text-2xl font-bold text-[var(--primary)] mb-3">UYU {prop.price}/mes</p>
+                                                <Link to={`/property/${prop.id}`} className="block text-center btn-primary">Ver Detalles</Link>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </>
+                    )}
+                </div>
+            );
+        }
+
+        function AdminPage() {
+            const [user] = React.useState(JSON.parse(localStorage.getItem('currentUser')));
+            const [users, setUsers] = React.useState(usersData);
+            const history = useHistory();
+
+            if (!user || user.role !== 'admin') {
+                history.push('/login');
+                return null;
+            }
+
+            const handleDeleteUser = (userId) => {
+                const updatedUsers = users.filter(u => u.id !== userId);
+                setUsers(updatedUsers);
+                saveUsers(updatedUsers);
+                alert('Usuario eliminado.');
+            };
+
+            const handleToggleFeatured = (propId) => {
+                propertiesData.forEach(prop => {
+                    if (prop.id === propId) {
+                        prop.isFeatured = !prop.isFeatured;
+                    }
+                });
+                alert('Estado de propiedad actualizado.');
+            };
+
+            return (
+                <div className="container mx-auto p-6">
+                    <h1 className="text-3xl font-bold mb-6 text-center text-[var(--primary)]">Panel de Administración</h1>
+                    <h2 className="text-2xl font-semibold mb-4 text-[var(--primary)]">Gestionar Usuarios</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        {users.filter(u => u.role !== 'admin').map(u => (
+                            <div key={u.id} className="bg-white p-4 rounded-lg shadow-md">
+                                <h3 className="text-xl font-semibold">{u.name}</h3>
+                                <p className="text-gray-600">Email: {u.email}</p>
+                                <p className="text-gray-600">Rol: {u.role}</p>
+                                <p className="text-gray-600">Ciudad: {u.city}</p>
+                                <button
+                                    onClick={() => handleDeleteUser(u.id)}
+                                    className="mt-2 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                                >
+                                    Eliminar
+                                </button>
+                            </div>
+                        ))}
+                    </div>
+                    <h2 className="text-2xl font-semibold mb-4 text-[var(--primary)]">Gestionar Propiedades</h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {propertiesData.map(prop => (
+                            <div key={prop.id} className="property-card bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
+                                <img src={prop.images[0]} alt={prop.title} className="w-full h-48 object-cover" />
+                                <div className="p-4 flex-grow flex flex-col justify-between">
+                                    <div>
+                                        <span className="inline-block bg-[var(--accent)] text-white text-xs px-2 rounded-full mb-1">{prop.type}</span>
+                                        <h3 className="text-xl font-semibold mb-1">{prop.title}</h3>
+                                        <p className="text-gray-600 text-sm mb-2">{prop.location}</p>
+                                    </div>
+                                    <div>
+                                        <p className="text-2xl font-bold text-[var(--primary)] mb-3">UYU {prop.price}/mes</p>
+                                        <button
+                                            onClick={() => handleToggleFeatured(prop.id)}
+                                            className={`block text-center px-4 py-2 rounded ${prop.isFeatured ? 'bg-[var(--secondary)] text-black' : 'bg-gray-500 text-white'} hover:bg-opacity-80`}
+                                        >
+                                            {prop.isFeatured ? 'Quitar Destacado' : 'Marcar Destacado'}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        }
+
+        function PropertyPage() {
+            const { id } = useParams();
+            const property = propertiesData.find(p => p.id === parseInt(id));
+            if (!property) return <div className="container mx-auto p-6">Propiedad no encontrada</div>;
+            const agency = agenciesData.find(a => a.id === property.agencyId);
+            return (
+                <div className="container mx-auto p-6">
+                    <h1 className="text-3xl font-bold mb-6 text-[var(--primary)]">{property.title}</h1>
+                    <img src={property.images[0]} alt={property.title} className="w-full h-96 object-cover rounded-lg mb-4" />
+                    <p className="text-gray-700 mb-4">{property.description}</p>
+                    <p className="text-2xl font-bold text-[var(--primary)] mb-4">UYU {property.price}/mes</p>
+                    <p className="text-gray-600 mb-2"><strong>Ubicación:</strong> {property.location}</p>
+                    <p className="text-gray-600 mb-2"><strong>Dormitorios:</strong> {property.bedrooms}</p>
+                    <p className="text-gray-600 mb-2"><strong>Baños:</strong> {property.bathrooms}</p>
+                    <p className="text-gray-600 mb-2"><strong>Área:</strong> {property.area} m²</p>
+                    <p className="text-gray-600 mb-4"><strong>Puntos de Interés:</strong> {property.pointsOfInterest.join(', ')}</p>
+                    {agency && (
+                        <div className="bg-white p-4 rounded-lg shadow-md mb-4">
+                            <h3 className="text-xl font-semibold mb-2">Publicado por: {agency.name}</h3>
+                            <img src={agency.logo} alt={agency.name} className="w-24 h-24 object-contain mb-2" />
+                            <p className="text-gray-600">{agency.description}</p>
+                            <p className="text-[var(--accent)]">Contacto: {agency.contact}</p>
+                        </div>
+                    )}
+                    <Link to="/" className="inline-block btn-primary">Volver</Link>
+                </div>
+            );
+        }
+
+        function ListPropertyPage() {
+            const [user] = React.useState(JSON.parse(localStorage.getItem('currentUser')));
+            const [formData, setFormData] = React.useState({
+                type: '', title: '', description: '', price: '', location: '', bedrooms: '', bathrooms: '', area: '', amenities: [], images: [''], pointsOfInterest: [], city: 'Artigas'
+            });
+            const [errors, setErrors] = React.useState({});
+            const history = useHistory();
+
+            if (!user) {
+                history.push('/login');
+                return null;
+            }
+
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                const newErrors = {};
+                if (!formData.type) newErrors.type = 'El tipo es obligatorio.';
+                if (!formData.title) newErrors.title = 'El título es obligatorio.';
+                if (!formData.price) newErrors.price = 'El precio es obligatorio.';
+                if (!formData.location) newErrors.location = 'La ubicación es obligatoria.';
+                setErrors(newErrors);
+                if (Object.keys(newErrors).length > 0) return;
+
+                propertiesData.push({
+                    id: Date.now(),
+                    ...formData,
+                    agencyId: user.role === 'agency' ? user.id : null,
+                    userId: user.role === 'client' ? user.id : null,
+                    isFeatured: false
+                });
+                alert('Propiedad publicada (simulada).');
+                history.push('/profile');
+            };
+
+            const handleAmenityChange = (amenity) => {
+                setFormData({
+                    ...formData,
+                    amenities: formData.amenities.includes(amenity)
+                        ? formData.amenities.filter(a => a !== amenity)
+                        : [...formData.amenities, amenity]
+                });
+            };
+
+            const handlePoiChange = (poi) => {
+                setFormData({
+                    ...formData,
+                    pointsOfInterest: formData.pointsOfInterest.includes(poi)
+                        ? formData.pointsOfInterest.filter(p => p !== poi)
+                        : [...formData.pointsOfInterest, poi]
+                });
+            };
+
+            return (
+                <div className="container mx-auto p-6">
+                    <h1 className="text-3xl font-bold mb-6 text-[var(--primary)]">Publicar Propiedad</h1>
+                    <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-xl space-y-4">
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 required">Tipo:</label>
+                            <select
+                                value={formData.type}
+                                onChange={(e) => setFormData({ ...formData, type: e.target.value })}
+                                className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
+                            >
+                                <option value="">Selecciona</option>
+                                <option value="Casa">Casa</option>
+                                <option value="Apartamento">Apartamento</option>
+                            </select>
+                            {errors.type && <p className="text-red-500 text-sm mt-1">{errors.type}</p>}
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 required">Título:</label>
+                            <input
+                                type="text"
+                                value={formData.title}
+                                onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                                className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
+                            />
+                            {errors.title && <p className="text-red-500 text-sm mt-1">{errors.title}</p>}
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">Descripción:</label>
+                            <textarea
+                                value={formData.description}
+                                onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                                className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
+                                rows="4"
+                            ></textarea>
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 required">Precio (UYU):</label>
+                            <input
+                                type="number"
+                                value={formData.price}
+                                onChange={(e) => setFormData({ ...formData, price: e.target.value })}
+                                className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
+                            />
+                            {errors.price && <p className="text-red-500 text-sm mt-1">{errors.price}</p>}
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 required">Ubicación:</label>
+                            <input
+                                type="text"
+                                value={formData.location}
+                                onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+                                className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
+                            />
+                            {errors.location && <p className="text-red-500 text-sm mt-1">{errors.location}</p>}
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">Dormitorios:</label>
+                            <input
+                                type="number"
+                                value={formData.bedrooms}
+                                onChange={(e) => setFormData({ ...formData, bedrooms: e.target.value })}
+                                className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">Baños:</label>
+                            <input
+                                type="number"
+                                value={formData.bathrooms}
+                                onChange={(e) => setFormData({ ...formData, bathrooms: e.target.value })}
+                                className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">Área (m²):</label>
+                            <input
+                                type="number"
+                                value={formData.area}
+                                onChange={(e) => setFormData({ ...formData, area: e.target.value })}
+                                className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">Ciudad:</label>
+                            <select
+                                value={formData.city}
+                                onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                                className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
+                            >
+                                <option value="Artigas">Artigas</option>
+                                <option value="Montevideo">Montevideo</option>
+                                <option value="Salto">Salto</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">Comodidades:</label>
+                            <div className="flex flex-wrap gap-4">
+                                {['jardín', 'garaje', 'balcón', 'piscina'].map(amenity => (
+                                    <label key={amenity} className="flex items-center">
+                                        <input
+                                            type="checkbox"
+                                            checked={formData.amenities.includes(amenity)}
+                                            onChange={() => handleAmenityChange(amenity)}
+                                            className="mr-2"
+                                        />
+                                        {amenity}
+                                    </label>
                                 ))}
                             </div>
                         </div>
-                        <h2 className="text-2xl font-semibold mb-4 text-[var(--primary)]">Propiedades de {agency.name}</h2>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {agencyProperties.map(prop => (
-                                <div key={prop.id} className="property-card bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
-                                    <img src={prop.images[0]} alt={prop.title} className="w-full h-48 object-cover" />
-                                    <div className="p-4 flex-grow flex flex-col justify-between">
-                                        <div>
-                                            <span className="inline-block bg-[var(--accent)] text-white text-xs px-2 rounded-full mb-1">{prop.type}</span>
-                                            <h3 className="text-xl font-semibold mb-1">{prop.title}</h3>
-                                            <p className="text-gray-600 text-sm mb-2">{prop.location}</p>
-                                        </div>
-                                        <div>
-                                            <p className="text-2xl font-bold text-[var(--primary)] mb-3">UYU {prop.price}/mes</p>
-                                            <Link to={`/property/${prop.id}`} className="block text-center btn-primary">Ver Detalles</Link>
-                                        </div>
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">Puntos de Interés:</label>
+                            <div className="flex flex-wrap gap-4">
+                                {['Plaza Artigas', 'Escuela', 'Supermercado'].map(poi => (
+                                    <label key={poi} className="flex items-center">
+                                        <input
+                                            type="checkbox"
+                                            checked={formData.pointsOfInterest.includes(poi)}
+                                            onChange={() => handlePoiChange(poi)}
+                                            className="mr-2"
+                                        />
+                                        {poi}
+                                    </label>
+                                ))}
+                            </div>
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">Imagen (URL):</label>
+                            <input
+                                type="url"
+                                value={formData.images[0]}
+                                onChange={(e) => setFormData({ ...formData, images: [e.target.value] })}
+                                className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
+                            />
+                        </div>
+                        <button type="submit" className="w-full btn-primary">Publicar Propiedad</button>
+                    </form>
+                </div>
+            );
+        }
+
+        function AgenciesPage() {
+            return (
+                <div className="container mx-auto p-6">
+                    <h1 className="text-3xl font-bold text-center mb-6 text-[var(--primary)]">Inmobiliarias en Uruguay</h1>
+                    <p className="text-center text-gray-600 mb-6">Conecta con las mejores inmobiliarias.</p>
+                    <Link to="/create-agency" className="inline-block btn-primary mb-6">Crear Perfil Inmobiliaria</Link>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {agenciesData.map(agency => (
+                            <div key={agency.id} className="agency-card bg-white p-4 rounded-lg shadow-md">
+                                <img src={agency.logo} alt={agency.name} className="w-24 h-24 object-contain mx-auto mb-4" />
+                                <h3 className="text-xl font-semibold text-center mb-2">{agency.name}</h3>
+                                <p className="text-gray-600 text-center mb-2">{agency.description}</p>
+                                <p className="text-gray-600 text-center mb-2"><strong>Plan:</strong> {agency.plan}</p>
+                                <p className="text-[var(--accent)] text-center mb-2"><strong>Contacto:</strong> {agency.contact}</p>
+                                <a href={agency.website} target="_blank" className="text-[var(--accent)] text-center block mb-2 hover:underline">Visitar sitio web</a>
+                                <div className="flex flex-wrap gap-2 justify-center">
+                                    {agency.images.map((img, idx) => (
+                                        <img key={idx} src={img} alt={`Office ${idx}`} className="w-20 h-20 object-cover rounded" />
+                                    ))}
+                                </div>
+                                <Link to={`/agency/${agency.id}`} className="block text-center btn-primary mt-4">Ver Perfil</Link>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        }
+
+        function CreateAgencyPage() {
+            const [formData, setFormData] = React.useState({
+                name: '', logo: '', description: '', images: [''], plan: 'Básico', contact: '', website: '', city: 'Artigas'
+            });
+            const [errors, setErrors] = React.useState({});
+            const history = useHistory();
+
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                const newErrors = {};
+                if (!formData.name) newErrors.name = 'El nombre es obligatorio.';
+                if (!formData.description) newErrors.description = 'La descripción es obligatoria.';
+                if (!formData.contact) newErrors.contact = 'El contacto es obligatorio.';
+                setErrors(newErrors);
+                if (Object.keys(newErrors).length > 0) return;
+
+                agenciesData.push({ id: Date.now(), ...formData });
+                alert('Perfil de inmobiliaria creado (simulado).');
+                history.push('/agencies');
+            };
+
+            return (
+                <div className="container mx-auto p-6">
+                    <h1 className="text-3xl font-bold mb-6 text-[var(--primary)]">Crear Perfil de Inmobiliaria</h1>
+                    <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-xl space-y-4">
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 required">Nombre:</label>
+                            <input
+                                type="text"
+                                value={formData.name}
+                                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
+                            />
+                            {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">Logo (URL):</label>
+                            <input
+                                type="url"
+                                value={formData.logo}
+                                onChange={(e) => setFormData({ ...formData, logo: e.target.value })}
+                                className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 required">Descripción:</label>
+                            <textarea
+                                value={formData.description}
+                                onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                                className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
+                                rows="4"
+                            ></textarea>
+                            {errors.description && <p className="text-red-500 text-sm mt-1">{errors.description}</p>}
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">Imágenes (URL):</label>
+                            <input
+                                type="url"
+                                value={formData.images[0]}
+                                onChange={(e) => setFormData({ ...formData, images: [e.target.value] })}
+                                className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">Plan:</label>
+                            <select
+                                value={formData.plan}
+                                onChange={(e) => setFormData({ ...formData, plan: e.target.value })}
+                                className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
+                            >
+                                <option value="Básico">Básico ($10/mes)</option>
+                                <option value="Pro">Pro ($25/mes)</option>
+                                <option value="Premium">Premium ($50/mes)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 required">Contacto:</label>
+                            <input
+                                type="text"
+                                value={formData.contact}
+                                onChange={(e) => setFormData({ ...formData, contact: e.target.value })}
+                                className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
+                            />
+                            {errors.contact && <p className="text-red-500 text-sm mt-1">{errors.contact}</p>}
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">Sitio Web:</label>
+                            <input
+                                type="url"
+                                value={formData.website}
+                                onChange={(e) => setFormData({ ...formData, website: e.target.value })}
+                                className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700">Ciudad:</label>
+                            <select
+                                value={formData.city}
+                                onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                                className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
+                            >
+                                <option value="Artigas">Artigas</option>
+                                <option value="Montevideo">Montevideo</option>
+                                <option value="Salto">Salto</option>
+                            </select>
+                        </div>
+                        <button type="submit" className="w-full btn-primary">Crear Perfil</button>
+                    </form>
+                </div>
+            );
+        }
+
+        function AgencyProfilePage() {
+            const { id } = useParams();
+            const agency = agenciesData.find(a => a.id === parseInt(id));
+            if (!agency) return <div className="container mx-auto p-6">Inmobiliaria no encontrada</div>;
+            const agencyProperties = propertiesData.filter(p => p.agencyId === agency.id);
+            return (
+                <div className="container mx-auto p-6">
+                    <h1 className="text-3xl font-bold mb-6 text-[var(--primary)]">{agency.name}</h1>
+                    <div className="bg-white p-6 rounded-lg shadow-md mb-6">
+                        <img src={agency.logo} alt={agency.name} className="w-32 h-32 object-contain mx-auto mb-4" />
+                        <p className="text-gray-700 mb-4">{agency.description}</p>
+                        <p className="text-gray-600 mb-2"><strong>Plan:</strong> {agency.plan}</p>
+                        <p className="text-[var(--accent)] mb-2"><strong>Contacto:</strong> {agency.contact}</p>
+                        {agency.website && <a href={agency.website} target="_blank" className="text-[var(--accent)] mb-2 block hover:underline">Visitar sitio web</a>}
+                        <div className="flex flex-wrap gap-2 justify-center">
+                            {agency.images.map((img, idx) => (
+                                <img key={idx} src={img} alt={`Office ${idx}`} className="w-24 h-24 object-cover rounded" />
+                            ))}
+                        </div>
+                    </div>
+                    <h2 className="text-2xl font-semibold mb-4 text-[var(--primary)]">Propiedades de {agency.name}</h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {agencyProperties.map(prop => (
+                            <div key={prop.id} className="property-card bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
+                                <img src={prop.images[0]} alt={prop.title} className="w-full h-48 object-cover" />
+                                <div className="p-4 flex-grow flex flex-col justify-between">
+                                    <div>
+                                        <span className="inline-block bg-[var(--accent)] text-white text-xs px-2 rounded-full mb-1">{prop.type}</span>
+                                        <h3 className="text-xl font-semibold mb-1">{prop.title}</h3>
+                                        <p className="text-gray-600 text-sm mb-2">{prop.location}</p>
+                                    </div>
+                                    <div>
+                                        <p className="text-2xl font-bold text-[var(--primary)] mb-3">UYU {prop.price}/mes</p>
+                                        <Link to={`/property/${prop.id}`} className="block text-center btn-primary">Ver Detalles</Link>
                                     </div>
                                 </div>
-                            ))}
-                        </div>
-                        <Link to="/agencies" className="inline-block btn-primary mt-6">Volver</Link>
+                            </div>
+                        ))}
                     </div>
-                );
-            }
+                    <Link to="/agencies" className="inline-block btn-primary mt-6">Volver</Link>
+                </div>
+            );
+        }
 
-            // LocalServicesPage Component
-            function LocalServicesPage() {
-                const [services, setServices] = React.useState(servicesData);
-                const [formData, setFormData] = React.useState({ name: '', category: '', contact: '', description: '', city: 'Artigas', affiliateLink: '' });
-                const [errors, setErrors] = React.useState({});
+        function LocalServicesPage() {
+            const [services, setServices] = React.useState(servicesData);
+            const [formData, setFormData] = React.useState({ name: '', category: '', contact: '', description: '', city: 'Artigas', affiliateLink: '' });
+            const [errors, setErrors] = React.useState({});
 
-                const handleSubmit = (e) => {
-                    e.preventDefault();
-                    const newErrors = {};
-                    if (!formData.name) newErrors.name = 'El nombre es obligatorio.';
-                    if (!formData.category) newErrors.category = 'La categoría es obligatoria.';
-                    if (!formData.contact) newErrors.contact = 'El contacto es obligatorio.';
-                    setErrors(newErrors);
-                    if (Object.keys(newErrors).length > 0) return;
-                    setServices([...services, { id: Date.now(), ...formData }]);
-                    setFormData({ name: '', category: '', contact: '', description: '', city: 'Artigas', affiliateLink: '' });
-                    alert('Servicio añadido (simulado).');
-                };
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                const newErrors = {};
+                if (!formData.name) newErrors.name = 'El nombre es obligatorio.';
+                if (!formData.category) newErrors.category = 'La categoría es obligatoria.';
+                if (!formData.contact) newErrors.contact = 'El contacto es obligatorio.';
+                setErrors(newErrors);
+                if (Object.keys(newErrors).length > 0) return;
+                setServices([...services, { id: Date.now(), ...formData }]);
+                setFormData({ name: '', category: '', contact: '', description: '', city: 'Artigas', affiliateLink: '' });
+                alert('Servicio añadido (simulado).');
+            };
 
-                return (
-                    <div className="container mx-auto p-6">
-                        <h1 className="text-3xl font-bold text-center mb-6 text-[var(--primary)]">Servicios Locales</h1>
-                        <div className="bg-white p-8 rounded-lg shadow-xl mb-6">
-                            <h2 className="text-2xl font-semibold mb-4 text-[var(--primary)]">Añadir Servicio</h2>
-                            <form onSubmit={handleSubmit} className="space-y-4">
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 required">Nombre:</label>
-                                    <input
-                                        type="text"
-                                        value={formData.name}
-                                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                        className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
-                                    />
-                                    {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+            return (
+                <div className="container mx-auto p-6">
+                    <h1 className="text-3xl font-bold text-center mb-6 text-[var(--primary)]">Servicios Locales</h1>
+                    <div className="bg-white p-8 rounded-lg shadow-xl mb-6">
+                        <h2 className="text-2xl font-semibold mb-4 text-[var(--primary)]">Añadir Servicio</h2>
+                        <form onSubmit={handleSubmit} className="space-y-4">
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 required">Nombre:</label>
+                                <input
+                                    type="text"
+                                    value={formData.name}
+                                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                    className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
+                                />
+                                {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 required">Categoría:</label>
+                                <select
+                                    value={formData.category}
+                                    onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                                    className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
+                                >
+                                    <option value="">Selecciona</option>
+                                    <option value="Plomería">Plomería</option>
+                                    <option value="Mudanzas">Mudanzas</option>
+                                    <option value="Electricidad">Electricidad</option>
+                                </select>
+                                {errors.category && <p className="text-red-500 text-sm mt-1">{errors.category}</p>}
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 required">Contacto:</label>
+                                <input
+                                    type="text"
+                                    value={formData.contact}
+                                    onChange={(e) => setFormData({ ...formData, contact: e.target.value })}
+                                    className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
+                                />
+                                {errors.contact && <p className="text-red-500 text-sm mt-1">{errors.contact}</p>}
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700">Descripción:</label>
+                                <textarea
+                                    value={formData.description}
+                                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                                    className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
+                                    rows="3"
+                                ></textarea>
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700">Ciudad:</label>
+                                <select
+                                    value={formData.city}
+                                    onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                                    className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
+                                >
+                                    <option value="Artigas">Artigas</option>
+                                    <option value="Montevideo">Montevideo</option>
+                                    <option value="Salto">Salto</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700">Enlace de Afiliado (Opcional):</label>
+                                <input
+                                    type="url"
+                                    value={formData.affiliateLink}
+                                    onChange={(e) => setFormData({ ...formData, affiliateLink: e.target.value })}
+                                    className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
+                                />
+                            </div>
+                            <button type="submit" className="w-full btn-primary">Añadir Servicio</button>
+                        </form>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {services.map(service => (
+                            <div key={service.id} className="bg-white p-4 rounded-lg shadow-md">
+                                <h3 className="text-xl font-semibold text-[var(--primary)]">{service.name}</h3>
+                                <p className="text-gray-600">{service.category}</p>
+                                <p className="text-gray-700">{service.description}</p>
+                                <p className="text-[var(--accent)] font-semibold">Contacto: {service.contact}</p>
+                                {service.affiliateLink && (
+                                    <a href={service.affiliateLink} target="_blank" className="text-[var(--accent)] hover:underline">Más información</a>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        }
+
+        function NeighborhoodGuidePage() {
+            React.useEffect(() => {
+                neighborhoodsData.forEach(neighborhood => {
+                    const map = L.map(`map-${neighborhood.id}`).setView([neighborhood.coordinates.lat, neighborhood.coordinates.lng], 13);
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                    }).addTo(map);
+                    L.marker([neighborhood.coordinates.lat, neighborhood.coordinates.lng])
+                        .addTo(map)
+                        .bindPopup(`<b>${neighborhood.name}</b>`)
+                        .openPopup();
+                });
+            }, []);
+
+            return (
+                <div className="container mx-auto p-6">
+                    <h1 className="text-3xl font-bold text-center mb-6 text-[var(--primary)]">Guía de Barrios</h1>
+                    <p className="text-center text-gray-600 mb-6">Explora los mejores barrios de Uruguay.</p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {neighborhoodsData.map(neighborhood => (
+                            <div key={neighborhood.id} className="neighborhood-card bg-white rounded-lg shadow-lg overflow-hidden">
+                                <div id={`map-${neighborhood.id}`} className="w-full h-48"></div>
+                                <div className="p-4">
+                                    <h3 className="text-xl font-semibold mb-2 text-[var(--primary)]">{neighborhood.name}</h3>
+                                    <p className="text-gray-600 mb-2">{neighborhood.description}</p>
+                                    <p className="text-gray-600"><strong>Comodidades:</strong> {neighborhood.amenities.join(', ')}</p>
                                 </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 required">Categoría:</label>
-                                    <select
-                                        value={formData.category}
-                                        onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                                        className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
-                                    >
-                                        <option value="">Selecciona</option>
-                                        <option value="Plomería">Plomería</option>
-                                        <option value="Mudanzas">Mudanzas</option>
-                                        <option value="Electricidad">Electricidad</option>
-                                    </select>
-                                    {errors.category && <p className="text-red-500 text-sm mt-1">{errors.category}</p>}
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700 required">Contacto:</label>
-                                    <input
-                                        type="text"
-                                        value={formData.contact}
-                                        onChange={(e) => setFormData({ ...formData, contact: e.target.value })}
-                                        className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
-                                    />
-                                    {errors.contact && <p className="text-red-500 text-sm mt-1">{errors.contact}</p>}
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700">Descripción:</label>
-                                    <textarea
-                                        value={formData.description}
-                                        onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                                        className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
-                                        rows="3"
-                                    ></textarea>
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700">Ciudad:</label>
-                                    <select
-                                        value={formData.city}
-                                        onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                                        className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
-                                    >
-                                        <option value="Artigas">Artigas</option>
-                                        <option value="Montevideo">Montevideo</option>
-                                        <option value="Salto">Salto</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-medium text-gray-700">Enlace de Afiliado (Opcional):</label>
-                                    <input
-                                        type="url"
-                                        value={formData.affiliateLink}
-                                        onChange={(e) => setFormData({ ...formData, affiliateLink: e.target.value })}
-                                        className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
-                                    />
-                                </div>
-                                <button type="submit" className="w-full btn-primary">Añadir Servicio</button>
-                            </form>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            );
+        }
+
+        function PlansPage() {
+            return (
+                <div className="container mx-auto p-6">
+                    <h1 className="text-3xl font-bold text-center mb-6 text-[var(--primary)]">Nuestros Planes</h1>
+                    <p className="text-center text-gray-600 mb-6">Elige el plan que mejor se adapte a tus necesidades.</p>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div className="bg-white p-6 rounded-lg shadow-md text-center">
+                            <h2 className="text-2xl font-semibold mb-4 text-[var(--primary)]">Básico</h2>
+                            <p className="text-3xl font-bold text-[var(--primary)] mb-4">$10/mes</p>
+                            <ul className="text-gray-600 mb-6">
+                                <li>Publicar hasta 5 propiedades</li>
+                                <li>Acceso a filtros básicos</li>
+                                <li>Soporte por email</li>
+                            </ul>
+                            <Link to="/register" className="inline-block btn-primary">Seleccionar</Link>
                         </div>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {services.map(service => (
-                                <div key={service.id} className="bg-white p-4 rounded-lg shadow-md">
-                                    <h3 className="text-xl font-semibold text-[var(--primary)]">{service.name}</h3>
-                                    <p className="text-gray-600">{service.category}</p>
-                                    <p className="text-gray-700">{service.description}</p>
-                                    <p className="text-[var(--accent)] font-semibold">Contacto: {service.contact}</p>
-                                    {service.affiliateLink && (
-                                        <a href={service.affiliateLink} target="_blank" className="text-[var(--accent)] hover:underline">Más información</a>
-                                    )}
-                                </div>
-                            ))}
+                        <div className="bg-white p-6 rounded-lg shadow-md text-center">
+                            <h2 className="text-2xl font-semibold mb-4 text-[var(--primary)]">Pro</h2>
+                            <p className="text-3xl font-bold text-[var(--primary)] mb-4">$25/mes</p>
+                            <ul className="text-gray-600 mb-6">
+                                <li>Publicar hasta 20 propiedades</li>
+                                <li>Filtros avanzados</li>
+                                <li>Soporte prioritario</li>
+                                <li>Propiedades destacadas</li>
+                            </ul>
+                            <Link to="/register" className="inline-block btn-primary">Seleccionar</Link>
+                        </div>
+                        <div className="bg-white p-6 rounded-lg shadow-md text-center">
+                            <h2 className="text-2xl font-semibold mb-4 text-[var(--primary)]">Premium</h2>
+                            <p className="text-3xl font-bold text-[var(--primary)] mb-4">$50/mes</p>
+                            <ul className="text-gray-600 mb-6">
+                                <li>Propiedades ilimitadas</li>
+                                <li>Análisis de mercado</li>
+                                <li>Soporte 24/7</li>
+                                <li>Anuncios patrocinados</li>
+                            </ul>
+                            <Link to="/register" className="inline-block btn-primary">Seleccionar</Link>
                         </div>
                     </div>
-                );
-            }
+                </div>
+            );
+        }
 
-            // NeighborhoodGuidePage Component
-            function NeighborhoodGuidePage() {
-                React.useEffect(() => {
-                    neighborhoodsData.forEach(neighborhood => {
-                        const map = L.map(`map-${neighborhood.id}`).setView([neighborhood.coordinates.lat, neighborhood.coordinates.lng], 13);
-                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                            attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                        }).addTo(map);
-                        L.marker([neighborhood.coordinates.lat, neighborhood.coordinates.lng])
-                            .addTo(map)
-                            .bindPopup(`<b>${neighborhood.name}</b>`)
-                            .openPopup();
-                    });
-                }, []);
+        function AdvertisePage() {
+            return (
+                <div className="container mx-auto p-6">
+                    <h1 className="text-3xl font-bold text-center mb-6 text-[var(--primary)]">Publicidad</h1>
+                    <p className="text-center text-gray-600 mb-6">Promociona tu negocio en Vive Artigas.</p>
+                    <div className="bg-white p-8 rounded-lg shadow-xl max-w-2xl mx-auto">
+                        <h2 className="text-2xl font-semibold mb-4 text-[var(--primary)]">Contáctanos</h2>
+                        <form className="space-y-4">
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 required">Nombre:</label>
+                                <input
+                                    type="text"
+                                    className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 required">Email:</label>
+                                <input
+                                    type="email"
+                                    className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700">Mensaje:</label>
+                                <textarea
+                                    className="mt-1 w-full p-2 border border-gray-300 rounded-md focus:ring-[var(--accent)]"
+                                    rows="4"
+                                ></textarea>
+                            </div>
+                            <button type="submit" className="w-full btn-primary">Enviar</button>
+                        </form>
+                    </div>
+                </div>
+            );
+        }
 
-                return (
-                    <div className="container mx-auto p-6">
-                        <h1 className="text-3xl
+        function App() {
+            return (
+                <BrowserRouter>
+                    <Header />
+                    <Switch>
+                        <Route exact path="/" component={HomePage} />
+                        <Route path="/login" component={Login
